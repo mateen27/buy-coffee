@@ -5,7 +5,7 @@ const SplashScreen = ({ navigation }) => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.push('DrawerParent');
+            navigation.push('OnBoarding');
         }, 3000)
     }, [])
 
