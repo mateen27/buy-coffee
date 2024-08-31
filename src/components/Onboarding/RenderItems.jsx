@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 20
     },
     image: {
-        marginTop: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 350,
-        resizeMode: 'contain'
+        // marginTop: 10,
+        width: 300,
+        resizeMode: 'contain',
+        marginLeft: 'auto',
+        // marginRight: 'auto'
     }
 })

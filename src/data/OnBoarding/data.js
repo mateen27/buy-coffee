@@ -3,7 +3,7 @@ import { ImageProps } from "react-native";
 const data = [
   {
     id: 1,
-    image: require("../../assets/images/Image1.png"),
+    image: require("../../assets/images/Image7.png"),
     text: "Lorem Ipsum dolor sit amet",
     textColor: "#f8dac2",
     backgroundColor: "#154f40",
