@@ -6,6 +6,7 @@ import DrawerParent from '../drawer/DrawerParent';
 import BottomParent from '../bottom/BottomParent';
 import Home from '../../screens/main/Home';
 import Header from '../../components/Main/Header';
+import Details from '../../screens/main/Details';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,9 @@ function StackNavigation() {
 
             {/* Redirecting to the Home Screen */}
             <Stack.Screen name='Home' component={Home} options={{ headerShown: false }}/>
+
+            {/* Redirecting to the Details Screen */}
+            <Stack.Screen name='Details' component={Details} options={{ headerShown: false }}/>
         </Stack.Navigator>
     </NavigationContainer>
   );

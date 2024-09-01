@@ -9,17 +9,21 @@ import {
 import React, { useEffect, useState } from "react";
 import fetchCoffeeData from "../../api/fetchCoffeeData";
 import { FlatList } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const TabSlider = () => {
   const [selectedTab, setSelectedTab] = useState("All Coffee");
   const [data, setData] = useState();
+
+//   navigation
+    const navigation = useNavigation();
 
   //   fetching the api data
     useEffect(() => {
         const fetchData = async () => {
             try {
               const coffeeData = await fetchCoffeeData();
-              console.log('coffee data', coffeeData);
+              // console.log('coffee data', coffeeData);
               setData(coffeeData);
             } catch (error) {
               console.error("Error fetching coffee data:", error);
@@ -32,9 +36,9 @@ const TabSlider = () => {
   const handleTabPress = (tab) => {
     setSelectedTab(tab);
     switch (tab) {
-      case "All Coffee":
-        // fetchData();
-        break;
+    //   case "All Coffee":
+    //     // fetchData();
+    //     break;
       case "Espresso":
         // setData(DATA_MACHIATO);
         break;
@@ -48,7 +52,8 @@ const TabSlider = () => {
 
   //   cards of the coffee
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.item}>
+    
+    <TouchableOpacity style={styles.item} key={item?.id} onPress={() => navigation.navigate('Details', { item })}>
       <Image source={{ uri: item?.image }} style={styles.itemImage} />
       <View style={styles.itemDetails}>
         <Text style={styles.itemTitle}>{item.title}</Text>
@@ -58,6 +63,7 @@ const TabSlider = () => {
         <Text style={styles.addToCartText}>+</Text>
       </TouchableOpacity>
     </TouchableOpacity>
+    
   );
 
   return (
