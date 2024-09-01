@@ -19,7 +19,7 @@ const Onboarding = ({ navigation }) => {
     function handlePress() {
         if ( currentIndex === data.length - 1 ) {
             // console.log('END');
-            navigation.navigate('Home'); // Navigate to Home Screen if the Onboarding is finished.
+            navigation.navigate('DrawerParent'); // Navigate to Home Screen if the Onboarding is finished.
             return;
         }
         setCurrentIndex( prev => prev + 1 );

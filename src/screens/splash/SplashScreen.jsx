@@ -5,7 +5,7 @@ const SplashScreen = ({ navigation }) => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.push('OnBoarding');
+            navigation.navigate('OnBoarding');  // maving to the OnBoarding SCreen
         }, 5000)
     }, [])
 

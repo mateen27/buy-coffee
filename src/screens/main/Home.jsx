@@ -12,12 +12,12 @@ import SearchBar from "../../components/Main/SearchBar";
 import Banner from "../../components/Main/Banner";
 import TabSlider from "../../components/Main/TabSlider";
 
-const Home = () => {
+const Home = ( {navigation} ) => {
 
   return (
-    <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container}>
       {/* Header Component */}
-      <Header />
+      <Header/>
 
       {/* Title Text */}
       <View style={styles.titleContainer}>
@@ -40,7 +40,6 @@ const Home = () => {
 
       {/* Slider Different Coffee Data */}
       <TabSlider />
-
 
     </SafeAreaView>
   );

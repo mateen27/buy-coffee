@@ -8,11 +8,16 @@ import {
   View,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = () => {
+
+  // navigation
+  const navigation = useNavigation();
+
   return (
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Image
             style={styles.menuIcon}
             source={require("../../assets/images/menu.png")}

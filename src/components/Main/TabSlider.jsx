@@ -19,7 +19,7 @@ const TabSlider = () => {
         const fetchData = async () => {
             try {
               const coffeeData = await fetchCoffeeData();
-              // console.log('coffee data', typeof coffeeData);
+              console.log('coffee data', coffeeData);
               setData(coffeeData);
             } catch (error) {
               console.error("Error fetching coffee data:", error);
@@ -130,14 +130,15 @@ const TabSlider = () => {
       </View>
 
       <View style={styles.cardContainer}>
-        <FlatList
+      <FlatList
           data={data}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           numColumns={2}
           columnWrapperStyle={styles.row}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
+          style={{ flexGrow: 1, }}
         />
       </View>
     </>
@@ -214,8 +215,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   cardContainer: {
-    flex: 1,
-    paddingBottom: 16
+    flex: 1
   },
   addToCartContainer: {
     backgroundColor: "#967259",
