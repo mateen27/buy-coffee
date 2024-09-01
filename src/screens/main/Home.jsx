@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Image,
   SafeAreaView,
@@ -6,28 +7,41 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
 import Header from "../../components/Main/Header";
 import SearchBar from "../../components/Main/SearchBar";
+import Banner from "../../components/Main/Banner";
+import TabSlider from "../../components/Main/TabSlider";
 
 const Home = () => {
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header Component of the Application */}
+      {/* Header Component */}
       <Header />
-      <View style={styles.textconatiner}>
-        <Text style={styles.text}>Find the best Coffee to your taste</Text>
+
+      {/* Title Text */}
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>Find the best Coffee to your taste</Text>
       </View>
 
-      <View style={{ flexDirection: "row", gap: 13 }}>
+      {/* SearchBar and Button */}
+      <View style={styles.searchContainer}>
         <SearchBar />
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
           <Image
-            style={styles.image}
+            style={styles.buttonImage}
             source={require("../../assets/images/slider.png")}
           />
         </TouchableOpacity>
       </View>
+
+      {/* Banner Image */}
+      <Banner />
+
+      {/* Slider Different Coffee Data */}
+      <TabSlider />
+
+
     </SafeAreaView>
   );
 };
@@ -40,30 +54,34 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     padding: 23,
   },
-  textconatiner: {
+  titleContainer: {
     marginTop: 30,
     marginBottom: 30,
-    marginBottom: 25,
     width: 220,
   },
-  text: {
+  titleText: {
     color: "#444444",
     fontSize: 22,
     fontWeight: "bold",
     lineHeight: 30,
   },
-  image: {
-    width: 40,
-    height: 40,
+  searchContainer: {
+    flexDirection: "row",
+    gap: 13,
   },
-  buttonContainer: {
+  button: {
     backgroundColor: "#967259",
     alignItems: "center",
     justifyContent: "center",
     width: 60,
     height: 60,
     borderRadius: 25,
+    borderBottomLeftRadius: 13,
     padding: 16,
-    borderBottomLeftRadius: 13
   },
+  buttonImage: {
+    width: 40,
+    height: 40,
+  },
+
 });
