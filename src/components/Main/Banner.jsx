@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
   },
   bannerImage: {
     width: "100%",
-    height: 200,
+    height: 160,
     resizeMode: "cover",
     borderRadius: 20,
   },
   bannerTextContainer: {
     position: "absolute",
-    bottom: "25%",
+    bottom: "10%",
     marginHorizontal: 24,
   },
   bannerText: {
