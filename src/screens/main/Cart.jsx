@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Button, ScrollView } f
 import React from 'react';
 import useStore from '../../zustand/store';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Cart = () => {
   // Get the cart items from Zustand store
@@ -16,6 +17,9 @@ const Cart = () => {
   const handleQuantityChange = (id, quantity) => {
     updateQuantity(id, quantity);
   };
+
+  // navigation
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={styles.container}>
@@ -73,7 +77,8 @@ const Cart = () => {
           />
           <Text style={styles.emptyCartText}>Your cart is empty</Text>
           <Text style={styles.subText}>Looks like you haven't added anything to your cart yet.</Text>
-          <TouchableOpacity style={styles.shopButton}>
+          <TouchableOpacity style={styles.shopButton} onPress={() => navigation.navigate('Home')
+          }>
             <Text style={styles.shopButtonText}>Shop Now</Text>
           </TouchableOpacity>
         </View>
@@ -196,5 +201,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
-

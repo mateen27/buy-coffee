@@ -7,15 +7,49 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import useStore from "../../zustand/store";
 
 const Details = ({ route }) => {
   // Accessing the item from the route parameters
   const { item } = route.params;
 
+  // get Details from the store of zustand
+  const { toggleDarkMode, likeCoffee, unlikeCoffee, likedCoffees, addToCart } = useStore(
+    (state) => ({
+      toggleDarkMode: state.toggleDarkMode,
+      likeCoffee: state.likeCoffee,
+      unlikeCoffee: state.unlikeCoffee,
+      likedCoffees: state.likedCoffees,
+      addToCart: state.addToCart,
+    })
+  );
+
   // State management
   const [coffeeSize, setCoffeeSize] = useState("S");
+  // state for storing if the coffee item is liked or not
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    // Check if the item is in the likedCoffees array
+    const isLiked = likedCoffees.some((coffee) => coffee.id === item.id);
+    setLiked(isLiked);
+  }, [likedCoffees, item.id]);
+
+  const toggleLike = () => {
+    if (liked) {
+      unlikeCoffee(item.id);
+      setLiked(false);
+    } else {
+      likeCoffee(item);
+      setLiked(true);
+    }
+  };
+
+  // navigation
+  const navigation = useNavigation();
 
   // Function to handle size selection
   const handleTabPress = (tab) => {
@@ -34,10 +68,14 @@ const Details = ({ route }) => {
             >
               {/* View for the Icons */}
               <View>
-                <TouchableOpacity style={styles.iconContainer}>
+                <TouchableOpacity
+                  style={styles.iconContainer}
+                  onPress={() => navigation.goBack()}
+                >
                   <AntDesign name="arrowleft" size={24} color="#333" />
                 </TouchableOpacity>
                 <TouchableOpacity
+                  onPress={toggleLike}
                   style={{
                     width: 40,
                     height: 40,
@@ -50,7 +88,11 @@ const Details = ({ route }) => {
                     alignItems: "center",
                   }}
                 >
-                  <AntDesign name="hearto" size={24} color="#333" />
+                  {liked ? (
+                    <AntDesign name="heart" size={24} color="#ff0000" />
+                  ) : (
+                    <AntDesign name="hearto" size={24} color="#333" />
+                  )}
                 </TouchableOpacity>
               </View>
 

@@ -1,31 +1,35 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
+import useStore from "../../zustand/store";
 
 const Liked = () => {
+  // Get liked coffees from Zustand store
+  const likedCoffees = useStore((state) => state.likedCoffees);
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Title */}
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Special for you</Text>
       </View>
 
-      {/* Special Offer Section */}
-      <View style={styles.specialContainer}>
-        <View style={styles.specialContent}>
-          {/* Image */}
-          <Image
-            style={styles.image}
-            source={{
-              uri: "https://coffee.alexflipnote.dev/qGGgML0A4t4_coffee.png",
-            }}
-          />
-          {/* Description */}
-          <Text style={styles.descriptionText}>
-            Specially mixed and brewed which you must try!
-          </Text>
-        </View>
-      </View>
-    </View>
+      {/* Liked Coffees Section */}
+      {likedCoffees.length > 0 ? (
+        likedCoffees.map((coffee) => (
+          <View key={coffee.id} style={styles.card}>
+            <Image style={styles.image} source={{ uri: coffee.image }} />
+            <View style={styles.detailsContainer}>
+              <Text style={styles.cardTitle}>{coffee.title}</Text>
+              <Text style={styles.descriptionText}>
+                {coffee.description || "A delightful coffee blend you will love!"}
+              </Text>
+            </View>
+          </View>
+        ))
+      ) : (
+        <Text style={styles.noLikedText}>No liked coffees yet.</Text>
+      )}
+    </ScrollView>
   );
 };
 
@@ -36,8 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     padding: 20,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    // marginBottom: 30,
   },
   titleContainer: {
     marginTop: 50,
@@ -47,29 +50,44 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "600",
   },
-  specialContainer: {
-    width: "100%",
-    backgroundColor: "#967259",
+  card: {
+    flexDirection: "row",
+    backgroundColor: "#f2f2f2",
     borderRadius: 15,
     padding: 15,
     marginTop: 20,
-  },
-  specialContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+    // marginBottom: 30
   },
   image: {
     resizeMode: "cover",
-    width: 150,
+    width: 120,
     height: 150,
-    borderRadius: 20,
+    borderRadius: 10,
+  },
+  detailsContainer: {
+    flex: 1,
+    marginLeft: 15,
+    justifyContent: "center",
+  },
+  cardTitle: {
+    color: "#333",
+    fontSize: 18,
+    fontWeight: "600",
   },
   descriptionText: {
-    color: "#fff",
+    color: "#666",
+    fontSize: 14,
+    marginTop: 5,
+  },
+  noLikedText: {
+    marginTop: 20,
+    color: "#666",
     fontSize: 16,
-    fontWeight: "500",
-    flex: 1,
-    marginLeft: 20,
+    textAlign: "center",
   },
 });
