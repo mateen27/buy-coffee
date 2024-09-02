@@ -27,8 +27,6 @@ const Onboarding = ({ navigation }) => {
         buttonValue.value = withTiming( buttonValue.value + height )
     }
 
-    
-
     return (
         <View style={styles.container}>
             <View>

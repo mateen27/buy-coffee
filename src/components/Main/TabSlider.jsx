@@ -11,12 +11,18 @@ import fetchCoffeeData from "../../api/fetchCoffeeData";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
+// store from zustand
+import useStore from "../../zustand/store";
+
 const TabSlider = () => {
   const [selectedTab, setSelectedTab] = useState("All Coffee");
   const [data, setData] = useState();
 
 //   navigation
     const navigation = useNavigation();
+
+    // Zustand actions
+  const addToCart = useStore((state) => state.addToCart);
 
   //   fetching the api data
     useEffect(() => {
@@ -59,7 +65,7 @@ const TabSlider = () => {
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.itemPrice}>${item.id * 19 * 2}</Text>
       </View>
-      <TouchableOpacity style={styles.addToCartContainer}>
+      <TouchableOpacity style={styles.addToCartContainer} onPress={() => addToCart(item)}>
         <Text style={styles.addToCartText}>+</Text>
       </TouchableOpacity>
     </TouchableOpacity>

@@ -5,7 +5,6 @@ import Onboarding from '../../screens/onboarding/Onboarding';
 import DrawerParent from '../drawer/DrawerParent';
 import BottomParent from '../bottom/BottomParent';
 import Home from '../../screens/main/Home';
-import Header from '../../components/Main/Header';
 import Details from '../../screens/main/Details';
 
 const Stack = createStackNavigator();

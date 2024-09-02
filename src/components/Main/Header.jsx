@@ -33,16 +33,16 @@ const Header = () => {
         >
           <TouchableOpacity>
             <Image
-              style={{ height: 25, width: 25 }}
+              style={{ height: 30, width: 30 }}
               source={require("../../assets/images/moon.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Image
               style={{ height: 40, width: 40 }}
               source={require("../../assets/images/profile.png")}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
   );
