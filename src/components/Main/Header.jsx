@@ -28,7 +28,7 @@ const Header = () => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            gap: 25,
+            gap: 15,
           }}
         >
           <TouchableOpacity>
@@ -37,12 +37,12 @@ const Header = () => {
               source={require("../../assets/images/moon.png")}
             />
           </TouchableOpacity>
-          {/* <TouchableOpacity>
+          <TouchableOpacity>
             <Image
               style={{ height: 40, width: 40 }}
               source={require("../../assets/images/profile.png")}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
   );

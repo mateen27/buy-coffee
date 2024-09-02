@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 import React from 'react'
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 
 const RenderItems = ({ item }) => {
 
@@ -27,17 +28,18 @@ const styles = StyleSheet.create({
         padding: 40,
     },
     text: {
-        fontSize: 40,
+        fontSize: responsiveScreenFontSize(2.5),
         fontWeight: 'bold',
-        marginTop: 10,
+        marginTop: responsiveScreenWidth(10),
         textAlign: 'center',
-        marginHorizontal: 20
+        marginHorizontal: responsiveScreenWidth(10)
     },
     image: {
-        // marginTop: 10,
-        width: 300,
+        marginTop: responsiveScreenWidth(10),
+        width: responsiveScreenWidth(80),
+        height: responsiveScreenHeight(40),
         resizeMode: 'contain',
-        marginLeft: 'auto',
+        marginLeft: responsiveScreenWidth(15),
         // marginRight: 'auto'
     }
 })

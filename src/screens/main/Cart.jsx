@@ -25,7 +25,7 @@ const Cart = () => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style = {{ marginTop: 30, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <AntDesign name="arrowleft" size={30} color="black" />
         </TouchableOpacity>
         <Text style = {{ fontSize: 18, fontWeight: '600' }}>Cart</Text>

@@ -11,6 +11,7 @@ import Header from "../../components/Main/Header";
 import SearchBar from "../../components/Main/SearchBar";
 import Banner from "../../components/Main/Banner";
 import TabSlider from "../../components/Main/TabSlider";
+import { responsiveScreenFontSize, responsiveScreenWidth } from "react-native-responsive-dimensions";
 
 const Home = ( {navigation} ) => {
 
@@ -56,11 +57,11 @@ const styles = StyleSheet.create({
   titleContainer: {
     marginTop: 30,
     marginBottom: 30,
-    width: 220,
+    width: responsiveScreenWidth(60),
   },
   titleText: {
     color: "#444444",
-    fontSize: 22,
+    fontSize: responsiveScreenFontSize(2.4),
     fontWeight: "bold",
     lineHeight: 30,
   },

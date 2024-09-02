@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import fetchCoffeeData from "../../api/fetchCoffeeData";
 import { FlatList } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { responsiveWidth, responsiveHeight, responsiveFontSize } from "react-native-responsive-dimensions";
 
 // store from zustand
 import useStore from "../../zustand/store";
@@ -18,35 +19,32 @@ const TabSlider = () => {
   const [selectedTab, setSelectedTab] = useState("All Coffee");
   const [data, setData] = useState();
 
-//   navigation
-    const navigation = useNavigation();
+  // navigation
+  const navigation = useNavigation();
 
-    // Zustand actions
+  // Zustand actions
   const addToCart = useStore((state) => state.addToCart);
 
-  //   fetching the api data
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-              const coffeeData = await fetchCoffeeData();
-              // console.log('coffee data', coffeeData);
-              setData(coffeeData);
-            } catch (error) {
-              console.error("Error fetching coffee data:", error);
-            }
-          };
+  // fetching the api data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const coffeeData = await fetchCoffeeData();
+        // console.log('coffee data', coffeeData);
+        setData(coffeeData);
+      } catch (error) {
+        console.error("Error fetching coffee data:", error);
+      }
+    };
 
-          fetchData();
-    }, [])
+    fetchData();
+  }, []);
 
   const handleTabPress = (tab) => {
     setSelectedTab(tab);
     switch (tab) {
-    //   case "All Coffee":
-    //     // fetchData();
-    //     break;
       case "Espresso":
-        // setData(DATA_MACHIATO);
+        // setData(DATA_ESPRESSO);
         break;
       case "Latte":
         // setData(DATA_LATTE);
@@ -56,20 +54,25 @@ const TabSlider = () => {
     }
   };
 
-  //   cards of the coffee
+  // cards of the coffee
   const renderItem = ({ item }) => (
-    
-    <TouchableOpacity style={styles.item} key={item?.id} onPress={() => navigation.navigate('Details', { item })}>
+    <TouchableOpacity
+      style={styles.item}
+      key={item?.id}
+      onPress={() => navigation.navigate("Details", { item })}
+    >
       <Image source={{ uri: item?.image }} style={styles.itemImage} />
       <View style={styles.itemDetails}>
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.itemPrice}>${item.id * 19 * 2}</Text>
       </View>
-      <TouchableOpacity style={styles.addToCartContainer} onPress={() => addToCart(item)}>
+      <TouchableOpacity
+        style={styles.addToCartContainer}
+        onPress={() => addToCart(item)}
+      >
         <Text style={styles.addToCartText}>+</Text>
       </TouchableOpacity>
     </TouchableOpacity>
-    
   );
 
   return (
@@ -142,7 +145,7 @@ const TabSlider = () => {
       </View>
 
       <View style={styles.cardContainer}>
-      <FlatList
+        <FlatList
           data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
@@ -150,7 +153,7 @@ const TabSlider = () => {
           columnWrapperStyle={styles.row}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
-          style={{ flexGrow: 1, }}
+          style={{ flexGrow: 1 }}
         />
       </View>
     </>
@@ -163,18 +166,18 @@ const styles = StyleSheet.create({
   sliderContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    paddingVertical: 8,
+    paddingVertical: responsiveHeight(1),
   },
   sliderButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: responsiveWidth(1.7),
+    paddingVertical: responsiveHeight(1),
     borderRadius: 20,
   },
   selectedSliderButton: {
     backgroundColor: "#967259",
   },
   sliderText: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     color: "#888",
   },
   selectedSliderText: {
@@ -187,13 +190,12 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    margin: 8,
-    padding: 16,
+    margin: responsiveWidth(2),
+    padding: responsiveWidth(4),
     alignItems: "center",
     backgroundColor: "#ffffff",
     borderRadius: 16,
     overflow: "hidden",
-    // Shadow for iOS
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -201,49 +203,45 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    // Shadow for Android
     elevation: 5,
-    // marginBottom: 10
   },
   itemImage: {
-    width: 150,
-    height: 150,
+    width: responsiveWidth(35),
+    height: responsiveHeight(20),
     borderRadius: 18,
   },
   itemDetails: {
-    marginTop: 8,
-    // position: 'relative'
+    marginTop: responsiveHeight(1),
   },
   itemTitle: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     fontWeight: "bold",
     textAlign: "center",
   },
   itemPrice: {
-    fontSize: 16,
-    fontWeight: "700",
+    fontSize: responsiveFontSize(2),
+    fontWeight: "600",
     color: "#967259",
-    marginTop: 5,
+    marginTop: responsiveHeight(0.5),
     textAlign: "center",
   },
   cardContainer: {
-    flex: 1
+    flex: 1,
   },
   addToCartContainer: {
     backgroundColor: "#967259",
-    padding: 10,
+    padding: responsiveWidth(2.5),
     position: "absolute",
     bottom: 0,
     right: 0,
-    // borderRadius: 10,
-    height: 45,
-    width: 45,
+    height: responsiveWidth(11),
+    width: responsiveWidth(10),
     borderTopLeftRadius: 20,
     alignItems: "center",
   },
   addToCartText: {
     textAlign: "center",
-    fontSize: 22,
+    fontSize: responsiveFontSize(2.5),
     color: "#f1f1f1",
   },
 });

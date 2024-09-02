@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+import { responsiveWidth, responsiveHeight, responsiveFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveScreenFontSize } from 'react-native-responsive-dimensions';
 
 const Banner = () => {
   return (
@@ -34,34 +35,36 @@ export default Banner;
 const styles = StyleSheet.create({
   bannerContainer: {
     position: "relative",
-    marginBottom: 20,
-    marginTop: 25,
+    marginBottom: responsiveHeight(3),
+    marginTop: responsiveHeight(2.5),
   },
   bannerImage: {
-    width: "100%",
-    height: 160,
+    width: responsiveScreenWidth(88),
+    height: responsiveScreenHeight(16),
     resizeMode: "cover",
     borderRadius: 20,
   },
   bannerTextContainer: {
     position: "absolute",
-    bottom: "10%",
-    marginHorizontal: 24,
+    bottom: responsiveHeight(2),
+    marginHorizontal: responsiveWidth(6),
   },
   bannerText: {
     color: "#fff",
-    fontSize: 28,
-    letterSpacing: 1.1,
-    // bottom: 5,
-    // backgroundColor: '#000'
+    fontSize: responsiveScreenFontSize(2.6),
+    letterSpacing: 1,
   },
   promoContainer: {
     backgroundColor: "red",
     position: "absolute",
-    top: 20,
-    marginHorizontal: 24,
-    padding: 8,
-    borderRadius: 10,
+    top: responsiveScreenHeight(1.5),
+    marginHorizontal: responsiveScreenWidth(6),
+    padding: responsiveWidth(.6),
+    borderRadius: 8,
   },
-  promoText: { color: "#fff", fontSize: 14, fontWeight: "700" },
+  promoText: { 
+    color: "#fff", 
+    fontSize: responsiveScreenFontSize(1.6), 
+    fontWeight: "700" 
+  },
 });

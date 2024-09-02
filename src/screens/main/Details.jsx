@@ -17,20 +17,31 @@ const Details = ({ route }) => {
   const { item } = route.params;
 
   // get Details from the store of zustand
-  const { toggleDarkMode, likeCoffee, unlikeCoffee, likedCoffees, addToCart } = useStore(
-    (state) => ({
+  const { toggleDarkMode, likeCoffee, unlikeCoffee, likedCoffees, addToCart } =
+    useStore((state) => ({
       toggleDarkMode: state.toggleDarkMode,
       likeCoffee: state.likeCoffee,
       unlikeCoffee: state.unlikeCoffee,
       likedCoffees: state.likedCoffees,
       addToCart: state.addToCart,
-    })
-  );
+    }));
 
   // State management
   const [coffeeSize, setCoffeeSize] = useState("S");
   // state for storing if the coffee item is liked or not
   const [liked, setLiked] = useState(false);
+  // state for increasing the quantity of the coffee item
+  const [quantity, setQuantity] = useState(1);
+
+  // Function to increase quantity of coffee item
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  // Function to decrease quantity, ensuring it doesn't go below 1
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
 
   useEffect(() => {
     // Check if the item is in the likedCoffees array
@@ -54,6 +65,12 @@ const Details = ({ route }) => {
   // Function to handle size selection
   const handleTabPress = (tab) => {
     setCoffeeSize(tab);
+  };
+
+  // function for adding the item to cart and navigating to the cart screen
+  const addToCartHandler = () => {
+    addToCart(item);
+    navigation.navigate("Cart");
   };
 
   return (
@@ -254,11 +271,11 @@ const Details = ({ route }) => {
             <View style={{ marginTop: 25, marginBottom: 80 }}>
               <Text style={{ fontSize: 18, fontWeight: "600" }}>Quantity</Text>
               <View style={styles.quantityContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={decreaseQuantity}>
                   <AntDesign name="minuscircle" size={40} color="#967259" />
                 </TouchableOpacity>
-                <Text style={styles.quantityText}>1</Text>
-                <TouchableOpacity>
+                <Text style={styles.quantityText}>{quantity}</Text>
+                <TouchableOpacity onPress={increaseQuantity}>
                   <AntDesign name="pluscircle" size={40} color="#967259" />
                 </TouchableOpacity>
               </View>
@@ -269,8 +286,11 @@ const Details = ({ route }) => {
 
       {/* Bottom Navigator */}
       <View style={styles.bottomNavigator}>
-        <Text style={styles.priceText}>$12.99</Text>
-        <TouchableOpacity style={styles.addToCartButton}>
+        <Text style={styles.priceText}>${item.id * 19 * 2 * quantity}</Text>
+        <TouchableOpacity
+          style={styles.addToCartButton}
+          onPress={addToCartHandler}
+        >
           <Text style={styles.addToCartText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>

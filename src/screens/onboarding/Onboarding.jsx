@@ -4,6 +4,7 @@ import data from '../../data/OnBoarding/data'
 import RenderItems from '../../components/Onboarding/RenderItems'
 import CustomButton from '../../components/Onboarding/CustomButton'
 import { useSharedValue, withTiming } from 'react-native-reanimated'
+import { responsiveScreenFontSize } from 'react-native-responsive-dimensions'
 
 const Onboarding = ({ navigation }) => {
 
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
         bottom: 22, 
         color: '#000',
         fontWeight: '500',
-        letterSpacing: 1.2
+        letterSpacing: 1.2, 
+        fontSize: responsiveScreenFontSize(1.3)
     }
 })

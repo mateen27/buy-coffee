@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React, { useEffect } from 'react'
+import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth, responsiveWidth } from 'react-native-responsive-dimensions'
 
 const SplashScreen = ({ navigation }) => {
 
@@ -28,13 +29,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#ECE0D1',
   },
   image: {
-    width: 500,
+    width: responsiveScreenWidth(90),
     height: 500,
     resizeMode: 'contain',
     marginBottom: 50,
+    marginRight: responsiveWidth(5)
   },
   heading: {
-    fontSize: 24, 
+    fontSize: responsiveScreenFontSize(3), 
     fontWeight: 'bold',
     color: '#38220F',
   },
@@ -43,8 +45,8 @@ const styles = StyleSheet.create({
     marginLeft: 38, 
     marginRight: 38,
     marginTop: 20,
-    fontSize: 14,
-    letterSpacing: 1.2,
-    lineHeight: 25
+    fontSize: 17,
+    letterSpacing: 1.5,
+    lineHeight: responsiveScreenHeight(3),
   }
 })
